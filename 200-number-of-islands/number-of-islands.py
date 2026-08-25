@@ -1,9 +1,22 @@
-class Solution(object):
+class Solution:
     def numIslands(self, grid):
-        def sink(i, j):
-            if 0 <= i < len(grid) and 0 <= j < len(grid[i]) and grid[i][j] == '1':
-                grid[i][j] = '0'
-                map(sink, (i+1, i-1, i, i), (j, j, j+1, j-1))
-                return 1
-            return 0
-        return sum(sink(i, j) for i in range(len(grid)) for j in range(len(grid[i])))
+        count = 0
+
+        def dfs(r, c):
+            if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or grid[r][c] == '0':
+                return
+
+            grid[r][c] = '0'
+
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == '1':
+                    count += 1
+                    dfs(r, c)
+
+        return count
