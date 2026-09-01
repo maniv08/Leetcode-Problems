@@ -18,9 +18,12 @@ class Solution {
         return helper(root,val);
     }
     public TreeNode helper(TreeNode node,int val){
-        if(node==null)return new TreeNode(val);
-        if(node.val>val)node.left= helper(node.left,val);
-        if(node.val<val)node.right= helper(node.right,val);
+        if(node==null)
+        return new TreeNode(val);
+        if(node.val>val)
+        node.left= helper(node.left,val);
+        if(node.val<val)
+        node.right= helper(node.right,val);
         return node;
     }
 }
